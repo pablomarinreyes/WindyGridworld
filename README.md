@@ -21,7 +21,7 @@
   * [Estrategia Óptima](#Estrategia-Óptima)
 * [Conclusiones](#Conclusiones)
   * [SARSA vs Q-Learning](#SARSA-vs-Q-Learning)  
-* [Anexo: Action Value Function](#Anexo:-Action-Value-Function)
+* [Anexo](#Anexo)
     * [SARSA](#SARSA)
     * [Expected SARSA](#Expected-SARSA)
     * [Q Learning](#Q-Learning)
@@ -65,7 +65,7 @@ Además, en la cuadricula soplan vientos verticales y laterales, lo que provoca 
 
 Aqui podemos observar un ejemplo de un agente que ha seguido una ruta determinada:
 
-![Ejemplo de entorno](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Environment.PNG)
+![Ejemplo de entorno](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Environment.PNG)
 
 
 
@@ -224,42 +224,40 @@ A continuación analizaremos los resultados obtenidos tras entrenar a nuestro ag
 Aqui se muestra la evolución tanto de la estimación de la función Q como del numero de pasos necesarios en cada episodio para llegar del estado inicial al estado final.
 #### Convergencia de la función Q
 En el eje vertical nos encontramos con el logaritmo en base 10 de la variación de la función Q entre episodios:
-![Log Evolution](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Logarithmic_evolution.png)
+![Log Evolution](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Logarithmic_evolution.png)
 Podemos observar como en el caso de SARSA, este no llega nunca a converger, mientras que eventualmente los demas algoritmos convergen.
 #### Pasos por episodio
 La siguiente figura muestra los pasos llevados a cabo por el agente para llegar del estado inicial al estado final:
-![Step Evolution](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/α=0.3γ=0.3ε=0.05.png)
+![Step Evolution](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/α=0.3γ=0.3ε=0.05.png)
 ### Q Value
 La siguiente figura muestra el valor de la funcion Q para cada estado. Este valor es la suma de los valores en un esado Q(estado,accion) para todas las acciones.
-Para los mas curiosos, en 
-[Anexo: Action Value Function](#Anexo:-Action-Value-Function) 
-se pueden encontrar las figuras que muestran los valores de Q(estado) para cada accion por separado. No se incluyen aquí porque la información que aportan no es comoda de interpretar.
+Para los mas curiosos, en [Anexo](#Anexo) se pueden encontrar las figuras que muestran los valores de Q(estado) para cada accion por separado. No se incluyen aquí porque la información que aportan no es comoda de interpretar.
 **Notese que en todos los estados (exclusivamente) que no han sido visitados durante el entrenamiento, la función Q vale 0**  
 
-![Q Function](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Q_Value.png)
+![Q Function](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Q_Value.png)
 ### Estrategia Óptima
 
 Ahora nuestro agente conoce la función Q que el ha estimado. Esta función estará bien aproximada si el entrenamiento se ha realizado con exito. 
 Teniendo esto en cuenta, lo mas inteligente será que ahora el agente lleve a cabo una estrategia determinista, realizando para cada estado la accion que maximiza Q.
 Ahora observamos que accion tomaría nuestro agente para cada estado:
 
-![Optimal Policy](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Optimal_Policy.png)
+![Optimal Policy](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Optimal_Policy.png)
 
 Si ahora dejamos que el agente siga esta estrategia durante un episodio, esto es lo que sucederia:
 
-![Optimal Run](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Optimal_Run.png)
+![Optimal Run](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Optimal_Run.png)
 
 <!-- CONCLUSIONES -->
 ## Conclusiones
 ### SARSA vs Q Learning
 Con los resultados que se han mostrado se puede concluir que, pese a llegar ambos algoritmos a soluciones identicas, Q Learning consigue que la función Q converga. SARSA por su parte no llega a este punto y la función Q nunca llega a converger (pese a que no varia demasiado de episodio a episodio).
 Esto demuestra que, pese a llevar una estrategia e-greedy, utilizar una estrategia determinista para analizar el estado futuro es bastante mejor que volver a aplicar la misma estrategia e-greedy. Esto sucede porque Q-Learning analiza el verdadero potencial del estado futuro al mirar el valor de Q para la accion que lo maximice, mientras que SARSA tiene una probabilidad de devolver un valor para ese estado futuro que no representa fielmente su potencial (ya que se escoge el valor de Q para una accion e-greedy).
-## Anexo: Action Value Function
+## Anexo
 Aqui podemos observar de manera desglosada la función Q(estado,accion) obtenida en cada uno de los algoritmos.
 ### SARSA
-![Q SARSA](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/SARSA.png)
+![Q SARSA](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/SARSA.png)
 ### Expected SARSA
-![Q Expected SARSA](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Expected_SARSA.png)
+![Q Expected SARSA](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Expected_SARSA.png)
 ### Q Learning
 ![Q Q Learning](https://raw.githubusercontent.com/pablomarinreyes/WindyGridworld/images/Q-Learning.png)
 ### Double Q learning

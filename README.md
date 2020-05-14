@@ -245,8 +245,6 @@ Nada mal. Nuestro agente ha aprendido que tiene que llegar a la casilla amarilla
 
 Podemos ver como el agente ha perfeccionado su estrategia con todos los algoritmos.
 
-*Nota:Con algoritmos SARSA no hay diferencia entre el episodio intermedio y el final. Esto es debido a que, como veremos mas adelante (Fig.5), la funcion Q tarda mas en converger o directamente no converge, y por tanto el episodio mostrado (cuando el agente llevaba del 10% del entrenamiento) es un episodio mucho mas avanzado que en los otros casos*
-
 A continuación se muestra la evolución tanto de la estimación de la función Q como del número de pasos necesarios en cada episodio para pasar del estado inicial al estado final.
 #### Convergencia de la función Q
 En el eje vertical nos encontramos con el logaritmo en base 10 de la variación de la función Q entre episodios:

@@ -28,7 +28,7 @@
     * [Double Q learning](#Double-Q-learning)
 
 
-
+___
 
 <!-- INTRODUCCION -->
 ## Introduccion
@@ -70,7 +70,7 @@ Aqui podemos observar un ejemplo de un agente que ha seguido una ruta determinad
 *Fig 1. Ejemplo de entorno*
 
 
-
+___
 
 <!-- Aprendizaje por refuerzo -->
 ## Aprendizaje por refuerzo
@@ -211,6 +211,9 @@ while episode < episodes:
 
     episode = episode + 1
 ```
+
+___
+
 ## Resultados
 A continuación analizaremos los resultados obtenidos tras entrenar a nuestro agente con las siguientes condiciones:
 * Cuadrícula de 10 por 10
@@ -286,12 +289,20 @@ Si ahora dejamos que el agente siga esta estrategia durante un episodio, esto es
 
 *Fig.9 Episodio óptimo*
 
+___
+
 <!-- CONCLUSIONES -->
 ## Conclusiones
+
+
 ### SARSA vs Q Learning
+
 Con los resultados que se han mostrado se puede concluir que, pese a llegar ambos algoritmos a soluciones identicas, Q Learning consigue que la función Q converga. SARSA por su parte no llega a este punto y la función Q nunca llega a converger (pese a que no varia demasiado de episodio a episodio).
 Esto demuestra que, pese a llevar una estrategia e-greedy, utilizar una estrategia determinista para analizar el estado futuro es bastante mejor que volver a aplicar la misma estrategia e-greedy. 
 Esto hace que Q-Learning analice el verdadero potencial del estado futuro al mirar el valor de Q para la accion que lo maximice, mientras que SARSA tenga una probabilidad de devolver un valor para ese estado futuro que no representa fielmente su potencial (ya que se escoge el valor de Q siguiendo una estrategia e-greedy).
+
+___
+
 ## Anexo
 Aqui podemos observar de manera desglosada la función Q(estado,accion) obtenida en cada uno de los algoritmos.
 ### SARSA

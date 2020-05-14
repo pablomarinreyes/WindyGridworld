@@ -66,6 +66,7 @@ Además, en la cuadricula soplan vientos verticales y laterales, lo que provoca 
 Aqui podemos observar un ejemplo de un agente que ha seguido una ruta determinada:
 
 ![Ejemplo de entorno](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Environment.PNG)
+*Fig 1. Ejemplo de entorno*
 
 
 
@@ -221,20 +222,45 @@ A continuación analizaremos los resultados obtenidos tras entrenar a nuestro ag
 * epsilon = 0.05
 * Criterio de convergencia |Q-Q'| < 1e-20
 ### Evolucion
-Aqui se muestra la evolución tanto de la estimación de la función Q como del numero de pasos necesarios en cada episodio para llegar del estado inicial al estado final.
+A continuación analizaremos la evolución del comportamiento del agente a lo largo del entrenamiento.
+Para empezar veamos el primer episodio que realiza nuestro agente:
+![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/First_run.png)
+*Fig.2 Primer episodio*
+Al principio del entrenamiento el agente actúa caoticamente dado que tiene una estrategia aleatoria. 
+Veamos como se comporta el agente cuando llevamos un 10% del entrenamiento:
+![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/First_run.png)
+*Fig.3 Episodio al 10% del entrenamiento*
+Nada mal. Nuestro agente ha aprendido que tiene que llegar a la casilla amarilla. Aun puede mejorarse, veamos como se comporta cuando termina su entrenamiento:
+![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/First_run.png)
+*Fig.4 Episodio final*
+
+Podemos ver como el agente ha perfeccionado su estrategia con todos los algoritmos.
+
+*Nota:Con algoritmos SARSA no hay diferencia entre el episodio intermedio y el final. Esto es debido a que, como veremos mas adelante (Fig.5), la funcion Q tarda mas en converger o directamente no converge, y por tanto el episodio mostrado (cuando el agente llevaba del 10% del entrenamiento) es un episodio mucho mas avanzado que en los otros casos*
+
+A continuación se muestra la evolución tanto de la estimación de la función Q como del numero de pasos necesarios en cada episodio para llegar del estado inicial al estado final.
 #### Convergencia de la función Q
 En el eje vertical nos encontramos con el logaritmo en base 10 de la variación de la función Q entre episodios:
 ![Log Evolution](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Logarithmic_evolution.png)
-Podemos observar como en el caso de SARSA, este no llega nunca a converger, mientras que eventualmente los demas algoritmos convergen.
+*Fig.5 Convergencia de Q*
+
+Podemos observar como el algoritmo Q-Learning converge primero, antes de las 700 iteraciones. Le sigue el Double Q-Learning con el doble de iteraciones aproximadamente, lo cual tiene sentido ya que tiene que estimar 2 funciones Q en lugar de una. El Expected SARSA llega a converger aunque le cuesta casi 14000 iteraciones. El algoritmo SARSA no llega a converger. Este asunto se discutirá en las conclusiones.
+
+
 #### Pasos por episodio
 La siguiente figura muestra los pasos llevados a cabo por el agente para llegar del estado inicial al estado final:
 ![Step Evolution](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/α=0.3γ=0.3ε=0.05.png)
+*Fig.6 Pasos por episodio*
+
+Al principio del entrenamiento el agente toma decisiones al azar y como consecuencia el numero de pasos hasta llegar a la casilla amarilla es muy alto. En pocas iteraciones el agente aprende que la estrategia es llegar a la casilla amarilla, por tanto no se suele perder mucho y el numero de pasos por episodio se estabiliza.
 ### Q Value
 La siguiente figura muestra el valor de la funcion Q para cada estado. Este valor es la suma de los valores en un esado Q(estado,accion) para todas las acciones.
 Para los mas curiosos, en [Anexo](#Anexo) se pueden encontrar las figuras que muestran los valores de Q(estado) para cada accion por separado. No se incluyen aquí porque la información que aportan no es comoda de interpretar.
-**Notese que en todos los estados (exclusivamente) que no han sido visitados durante el entrenamiento, la función Q vale 0**  
+*Nota: En todos los estados (exclusivamente) que no han sido visitados durante el entrenamiento, la función Q vale 0*  
 
 ![Q Function](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Q_Value.png)
+*Fig.7 Q(estado)*
+
 ### Estrategia Óptima
 
 Ahora nuestro agente conoce la función Q que el ha estimado. Esta función estará bien aproximada si el entrenamiento se ha realizado con exito. 
@@ -242,23 +268,30 @@ Teniendo esto en cuenta, lo mas inteligente será que ahora el agente lleve a ca
 Ahora observamos que accion tomaría nuestro agente para cada estado:
 
 ![Optimal Policy](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Optimal_Policy.png)
+*Fig.8 Estrategia óptima*
 
 Si ahora dejamos que el agente siga esta estrategia durante un episodio, esto es lo que sucederia:
 
 ![Optimal Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Optimal_Run.png)
+*Fig.9 Episodio óptimo*
 
 <!-- CONCLUSIONES -->
 ## Conclusiones
 ### SARSA vs Q Learning
 Con los resultados que se han mostrado se puede concluir que, pese a llegar ambos algoritmos a soluciones identicas, Q Learning consigue que la función Q converga. SARSA por su parte no llega a este punto y la función Q nunca llega a converger (pese a que no varia demasiado de episodio a episodio).
-Esto demuestra que, pese a llevar una estrategia e-greedy, utilizar una estrategia determinista para analizar el estado futuro es bastante mejor que volver a aplicar la misma estrategia e-greedy. Esto sucede porque Q-Learning analiza el verdadero potencial del estado futuro al mirar el valor de Q para la accion que lo maximice, mientras que SARSA tiene una probabilidad de devolver un valor para ese estado futuro que no representa fielmente su potencial (ya que se escoge el valor de Q para una accion e-greedy).
+Esto demuestra que, pese a llevar una estrategia e-greedy, utilizar una estrategia determinista para analizar el estado futuro es bastante mejor que volver a aplicar la misma estrategia e-greedy. 
+Esto hace que Q-Learning analice el verdadero potencial del estado futuro al mirar el valor de Q para la accion que lo maximice, mientras que SARSA tenga una probabilidad de devolver un valor para ese estado futuro que no representa fielmente su potencial (ya que se escoge el valor de Q siguiendo una estrategia e-greedy).
 ## Anexo
 Aqui podemos observar de manera desglosada la función Q(estado,accion) obtenida en cada uno de los algoritmos.
 ### SARSA
 ![Q SARSA](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/SARSA.png)
+*Fig.10 Q(estado,acción) SARSA*
 ### Expected SARSA
 ![Q Expected SARSA](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Expected_SARSA.png)
+*Fig.11 Q(estado,acción) Expected SARSA*
 ### Q Learning
 ![Q Q Learning](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Q-Learning.png)
+*Fig.12 Q(estado,acción) Q-Learning*
 ### Double Q learning
 ![Q Double Q learning](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Double_Q-Learning.png)
+*Fig.13 Q(estado,acción) Double Q-Learning*

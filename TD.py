@@ -306,23 +306,39 @@ def show_run(run,choices,gridworld,name,ax):
             Arrow = patches.Arrow(posx,posy,dx,dy,width=0.5)
             ax.add_patch(Arrow)
 
-def show_results(Q,behavoir,choices,policy,fitness,name,gw,agent):
+def show_results(Q,behavoir,actions,policy,fitness,name,gw,agent):
 
+    #prepare plots
     fig_pol, axs_pol = plt.subplots(2,2,figsize=(5, 5))
     fig_pol.canvas.set_window_title("Optimal Policy")
     fig_run, axs_run = plt.subplots(2,2,figsize=(5, 5))
     fig_run.canvas.set_window_title("Optimal Run")
     fig_Q, axs_Q = plt.subplots(2,2,figsize=(5, 5))
     fig_Q.canvas.set_window_title("Q Value")
-    
+    fig_f, axs_f = plt.subplots(2,2,figsize=(5, 5))
+    fig_f.canvas.set_window_title("First run")
+    fig_m, axs_m = plt.subplots(2,2,figsize=(5, 5))
+    fig_m.canvas.set_window_title("Medium run")
+    fig_fi, axs_fi = plt.subplots(2,2,figsize=(5, 5))
+    fig_fi.canvas.set_window_title("Final run")
     
 
 
     for i in range(0,name.shape[0]):        
         run,choices = gw.episode(agent,policy[i]) 
+        #optimal run
         show_run(run,choices,gw,f"{name[i]}",axs_run[i%2,math.floor(i/2)])
+        #first run
+        show_run(behavoir[i][0],actions[i][0],gw,f"{name[i]}",axs_f[i%2,math.floor(i/2)])
+        #middle run
+        show_run(behavoir[i][int(len(behavoir[i])/10)],actions[i][int(len(actions[i])/10)],gw,f"{name[i]}",axs_m[i%2,math.floor(i/2)])
+        #last run
+        show_run(behavoir[i][len(behavoir[i])-1],actions[i][len(actions[i])-1],gw,f"{name[i]}",axs_fi[i%2,math.floor(i/2)])
+        #optimal policy
         show_policy(policy[i],gw,f"{name[i]}",axs_pol[i%2,math.floor(i/2)])
+        #Q function
         showQ(Q[i],gw,f"{name[i]}",axs_Q[i%2,math.floor(i/2)],fig_Q)
+        #Q(s,a)
         showQsa(Q[i],gw,f"{name[i]}")
     #fig_Q.colorbar(axs_Q)
     """run,choices = gw.episode(agent,policy)

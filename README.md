@@ -231,12 +231,12 @@ Para empezar veamos el primer episodio que realiza nuestro agente:
 
 Al principio del entrenamiento el agente actúa caoticamente dado que tiene una estrategia aleatoria. 
 Veamos como se comporta el agente cuando llevamos un 10% del entrenamiento:
-![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/First_run.png)
+![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Medium_run.png)
 
 *Fig.3 Episodio al 10% del entrenamiento*
 
 Nada mal. Nuestro agente ha aprendido que tiene que llegar a la casilla amarilla. Aun puede mejorarse, veamos como se comporta cuando termina su entrenamiento:
-![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/First_run.png)
+![First Run](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Final_run.png)
 
 *Fig.4 Episodio final*
 

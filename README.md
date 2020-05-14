@@ -65,7 +65,7 @@ Además, en la cuadricula soplan vientos verticales y laterales, lo que provoca 
 
 Aqui podemos observar un ejemplo de un agente que ha seguido una ruta determinada:
 
-![Ejemplo de entorno](https://raw.githubusercontent.com/pablomarinreyes/master/WindyGridworld/images/Environment.PNG)
+![Ejemplo de entorno](https://github.com/pablomarinreyes/WindyGridworld/blob/master/images/Environment.PNG)
 
 
 

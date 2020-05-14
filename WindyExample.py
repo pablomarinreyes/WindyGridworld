@@ -39,10 +39,7 @@ Pp = np.array([policy_SARSA,policy_ex_SARSA,policy_Q,policy_2Q])
 names = np.array(["SARSA","Expected SARSA","Q-Learning","Double Q-Learning"])
 
 TD.show_results(Qp,Bp,Cp,Pp,Fp,names,gw,agent)
-"""TD.show_results(Q_SARSA,SARSA_behavoir,SARSA_choices,policy_SARSA,fitness_SARSA,"SARSA",gw,agent)
-TD.show_results(Q_ex_SARSA,ex_SARSA_behavoir,ex_SARSA_choices,policy_ex_SARSA,fitness_ex_SARSA,"Expected SARSA",gw,agent)
-TD.show_results(Q_q,q_behavoir,q_choices,policy_Q,fitness_q,"Q-learning",gw,agent)
-TD.show_results(Q_2q1+Q_2q2,Q2_behavoir,Q2_choices,policy_2Q,fitness_2q,"Double Q-learning",gw,agent)"""
+
 
 
 
